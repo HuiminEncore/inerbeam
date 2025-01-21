@@ -1,79 +1,92 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Pressable } from "react-native";
+import { Pressable, Image } from "react-native";
 import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
+// import { useColorScheme } from "@/hooks/useColorScheme";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  // const colorScheme = useColorScheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        headerShown: true,
-        headerStyle: {
-          backgroundColor: Colors[colorScheme ?? "light"].background,
+        tabBarActiveTintColor: Colors.light.blue,
+        tabBarInactiveTintColor: Colors.light.black,
+        headerShown: false,
+        tabBarStyle: {
+          height: 70,
+          paddingBottom: 10,
+          paddingTop: 6,
         },
-        headerTintColor: Colors[colorScheme ?? "light"].text,
+        tabBarLabelStyle: {
+          fontSize: 11,
+          marginTop: 2,
+        },
       }}
     >
       <Tabs.Screen
-        name="(home)"
+        name="(AAhome)"
         options={{
-          title: "Home",
-          headerTitle: "Edisens",
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <>
-              <Pressable
-                onPress={() => {
-                  // Add your profile button action here
-                }}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                  marginLeft: 26,
-                })}
-              >
-                <FontAwesome
-                  name="user-circle"
-                  size={25}
-                  color={Colors[colorScheme ?? "light"].text}
-                />
-              </Pressable>
-            </>
-          ),
-          headerRight: () => (
-            <>
-              <Pressable
-                onPress={() => {
-                  // Add your plus button action here
-                }}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                  marginRight: 26,
-                })}
-              >
-                <FontAwesome
-                  name="plus"
-                  size={25}
-                  color={Colors[colorScheme ?? "light"].text}
-                />
-              </Pressable>
-            </>
-          ),
-          tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
+          title: "Dispositivos",
+          tabBarLabel: "Dispositivos",
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              source={require("../../assets/Icons/Dispositivos_Black.svg")}
+              style={{ width: 24, height: 24, tintColor: color }}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="(settings)"
+        name="(Espacios)"
         options={{
-          title: "Settings",
+          title: "Espacios",
+          tabBarLabel: "Espacios",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="cog" color={color} />
+            <Image
+              source={require("../../assets/Icons/Espacios_Black.svg")}
+              style={{ width: 24, height: 24, tintColor: color }}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="(Dashboard)"
+        options={{
+          title: "Dashboard",
+          tabBarLabel: "Dashboard",
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require("../../assets/Icons/Dashboard_Black.svg")}
+              style={{ width: 24, height: 24, tintColor: color }}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="(Alertas)"
+        options={{
+          title: "Alertas",
+          tabBarLabel: "Alertas",
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require("../../assets/Icons/Alertas_Black.svg")}
+              style={{ width: 24, height: 24, tintColor: color }}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="(Ajustes)"
+        options={{
+          title: "Ajustes",
+          tabBarLabel: "Ajustes",
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require("../../assets/Icons/Ajustes_Black.svg")}
+              style={{ width: 24, height: 24, tintColor: color }}
+            />
           ),
         }}
       />
