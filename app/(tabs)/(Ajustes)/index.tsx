@@ -1,8 +1,10 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { ThemedView } from "@/components/ThemedView";
+import { ImageContainer } from "@/components/ImageContainer";
 
-export default function MeScreen() {
+export default function AjustesScreen() {
   const menuItems = [
     {
       title: "Third-Party Services",
@@ -12,7 +14,8 @@ export default function MeScreen() {
   ];
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
+      <ImageContainer />
       {/* Profile Header */}
       <View style={styles.profileHeader}>
         <View style={styles.avatar}>
@@ -40,7 +43,7 @@ export default function MeScreen() {
       <TouchableOpacity style={styles.exitButton}>
         <Text style={styles.exitText}>Exit</Text>
       </TouchableOpacity>
-    </View>
+    </ThemedView>
   );
 }
 

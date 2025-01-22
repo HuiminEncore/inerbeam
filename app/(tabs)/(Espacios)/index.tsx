@@ -1,14 +1,14 @@
 import { StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
-import { Header } from "@/components/Header";
-import { SearchBar } from "@/components/SearchBar";
+import Header from "@/components/Header";
+import SearchBar from "@/components/SearchBar";
 import { ImageContainer } from "@/components/ImageContainer";
 
 export default function EspaciosScreen() {
   return (
     <ThemedView style={styles.container}>
       <ImageContainer />
-      <Header title="Edisens" leftIconName="back" rightIconName="plus" />
+      <Header title="Edisens" leftIconName="user" rightIconName="plus" />
       <SearchBar />
     </ThemedView>
   );

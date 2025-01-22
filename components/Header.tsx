@@ -1,8 +1,10 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { ThemedText } from "./ThemedText";
-import { ThemedView } from "./ThemedView";
-import { Colors } from "@/constants/Colors";
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { ThemedText } from './ThemedText';
+import { ThemedView } from './ThemedView';
+import { Colors } from '@/constants/Colors';
+import { Link } from 'expo-router';
+import { useState } from 'react';
 
 interface HeaderProps {
   onProfilePress?: () => void;
@@ -10,82 +12,183 @@ interface HeaderProps {
   title?: string;
   leftIconName?: string;
   rightIconName?: string;
+  onBackPress?: () => void;
+  backLink?: string;
 }
 
-export function Header({
-  onProfilePress,
-  onNotificationPress,
-  title = "Edisens",
-  leftIconName = "user",
-  rightIconName = "plus",
+interface DrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const Drawer = ({ isOpen, onClose }: DrawerProps) => {
+  return isOpen ? (
+    <TouchableOpacity
+      style={styles.drawerOverlay}
+      onPress={onClose}
+      activeOpacity={1}
+    >
+      <View style={styles.drawer}>
+        <Link href="/(tabs)/(AAhome)" asChild>
+          <TouchableOpacity style={styles.menuItem}>
+            <View style={styles.subMenuItem}>
+              <FontAwesome name="plus" size={20} color={Colors.light.gray} />
+              <ThemedText style={styles.menuItemText}>Add Device</ThemedText>
+            </View>
+            <View style={styles.subMenuItem}>
+              <FontAwesome name="plus" size={20} color={Colors.light.gray} />
+              <ThemedText style={styles.menuItemText}>Add Alert</ThemedText>
+            </View>
+          </TouchableOpacity>
+        </Link>
+      </View>
+    </TouchableOpacity>
+  ) : null;
+};
+
+export default function Header({
+  title = 'Edisens',
+  leftIconName = 'user',
+  rightIconName = 'plus',
+  onBackPress,
+  backLink,
 }: HeaderProps) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleOptionsPress = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <View style={styles.header}>
-      <TouchableOpacity onPress={onProfilePress}>
-        {leftIconName === "user" && (
-          <ThemedView style={styles.leftIcon}>
-            <FontAwesome name={"user"} size={24} color={Colors.light.gray} />
-          </ThemedView>
+    <>
+      <View style={styles.header}>
+        {leftIconName === 'back' ? (
+          <Link href={backLink as any} asChild>
+            <TouchableOpacity onPress={onBackPress}>
+              <ThemedView style={styles.backIcon}>
+                <FontAwesome
+                  name="chevron-left"
+                  size={24}
+                  color={Colors.light.gray}
+                />
+                <ThemedText style={styles.backText}>Volver</ThemedText>
+              </ThemedView>
+            </TouchableOpacity>
+          </Link>
+        ) : (
+          <Link href="/(tabs)/(Ajustes)" asChild>
+            <TouchableOpacity>
+              <ThemedView style={styles.leftIcon}>
+                <FontAwesome name="user" size={24} color={Colors.light.gray} />
+              </ThemedView>
+            </TouchableOpacity>
+          </Link>
         )}
-        {leftIconName === "back" && (
-          <ThemedView style={styles.backIcon}>
+        <ThemedText style={styles.title}>{title}</ThemedText>
+        <TouchableOpacity onPress={handleOptionsPress}>
+          <ThemedView style={styles.rightIcon}>
             <FontAwesome
-              name="chevron-left"
+              name={rightIconName as any}
               size={24}
               color={Colors.light.gray}
             />
-            <ThemedText style={styles.backText}>Volver</ThemedText>
           </ThemedView>
-        )}
-      </TouchableOpacity>
-      <ThemedText style={styles.title}>{title}</ThemedText>
-      <TouchableOpacity onPress={onNotificationPress}>
-        <FontAwesome
-          name={rightIconName as any}
-          size={24}
-          color={Colors.light.gray}
-        />
-      </TouchableOpacity>
-    </View>
+        </TouchableOpacity>
+      </View>
+      <Drawer isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 24,
     paddingTop: 60,
     paddingBottom: 24,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: Colors.light.gray,
+    flex: 1,
+    textAlign: 'center',
   },
   leftIcon: {
     backgroundColor: Colors.light.white,
     width: 48,
     height: 48,
     borderRadius: 100,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  backIcon: {
-    backgroundColor: "transparent",
+  rightIcon: {
+    backgroundColor: 'transparent',
     width: 48,
     height: 48,
     borderRadius: 100,
-    justifyContent: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backIcon: {
+    backgroundColor: 'transparent',
+    width: 48,
+    height: 48,
+    borderRadius: 100,
+    justifyContent: 'center',
+    flexDirection: 'row',
     gap: 8,
-    alignItems: "center",
+    alignItems: 'center',
   },
   backText: {
     fontSize: 16,
     color: Colors.light.gray,
-    fontWeight: "bold",
+    fontWeight: 'bold',
+  },
+  drawerOverlay: {
+    position: 'absolute',
+    top: 100,
+    right: 24,
+    zIndex: 1000,
+  },
+  drawer: {
+    backgroundColor: Colors.light.white,
+    borderRadius: 12,
+    padding: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    minWidth: 160,
+  },
+  menuItem: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 12,
+    gap: 12,
+  },
+  menuItemText: {
+    fontSize: 16,
+    color: Colors.light.gray,
+  },
+  subMenuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  menuItemIcon: {
+    backgroundColor: Colors.light.white,
+    width: 48,
+    height: 48,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

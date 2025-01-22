@@ -1,8 +1,7 @@
-import { FontAwesome } from "@expo/vector-icons";
-import { Stack } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { Stack } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
 
-export default function SettingsLayout() {
+export default function HomeLayout() {
   return (
     <View style={styles.container}>
       <Stack
@@ -10,9 +9,15 @@ export default function SettingsLayout() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="index" options={{ title: "Edisens" }} />
-        <Stack.Screen name="devices" options={{ title: "Devices" }} />
-        <Stack.Screen name="device" options={{ title: "Device" }} />
+        <Stack.Screen name="index" options={{ title: 'Edisens' }} />
+        <Stack.Screen
+          name="device/[device]/index"
+          options={{ title: 'Device' }}
+        />
+        <Stack.Screen
+          name="device/[device]/metric/[metric]/index"
+          options={{ title: 'Metric' }}
+        />
       </Stack>
     </View>
   );
@@ -24,9 +29,9 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    position: "absolute",
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
   },
   headerIcon: {
     padding: 10,

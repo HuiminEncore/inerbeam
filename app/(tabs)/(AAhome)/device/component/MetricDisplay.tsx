@@ -13,14 +13,14 @@ interface MetricDisplayProps {
   link: string;
 }
 
-export const MetricDisplay = ({
+export default function MetricDisplay({
   icon,
   name,
   value,
   unit,
   deviceId,
   link,
-}: MetricDisplayProps) => {
+}: MetricDisplayProps) {
   const metrixLink = [
     {
       icon: "temperature",

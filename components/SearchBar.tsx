@@ -8,10 +8,10 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({
+export default function SearchBar({
   onChangeText,
   placeholder = "Search...",
-}) => {
+}: SearchBarProps) {
   return (
     <ThemedView style={styles.searchBar}>
       <Ionicons name="search-outline" size={24} color="black" />
@@ -23,7 +23,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       />
     </ThemedView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   searchBar: {

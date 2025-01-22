@@ -1,13 +1,9 @@
-import { Tabs } from "expo-router";
-import React from "react";
-import { Pressable, Image } from "react-native";
-import { Colors } from "@/constants/Colors";
-// import { useColorScheme } from "@/hooks/useColorScheme";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Tabs } from 'expo-router';
+import React from 'react';
+import { Image } from 'react-native';
+import { Colors } from '@/constants/Colors';
 
 export default function TabLayout() {
-  // const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
@@ -28,11 +24,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(AAhome)"
         options={{
-          title: "Dispositivos",
-          tabBarLabel: "Dispositivos",
-          tabBarIcon: ({ color, focused }) => (
+          title: 'Dispositivos',
+          tabBarLabel: 'Dispositivos',
+          tabBarIcon: ({ color }) => (
             <Image
-              source={require("../../assets/Icons/Dispositivos_Black.svg")}
+              source={require('../../assets/Icons/PNG/Dispositivos_Black.png')}
               style={{ width: 24, height: 24, tintColor: color }}
             />
           ),
@@ -41,11 +37,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(Espacios)"
         options={{
-          title: "Espacios",
-          tabBarLabel: "Espacios",
+          title: 'Espacios',
+          tabBarLabel: 'Espacios',
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../../assets/Icons/Espacios_Black.svg")}
+              source={require('../../assets/Icons/PNG/Espacios_Black.png')}
               style={{ width: 24, height: 24, tintColor: color }}
             />
           ),
@@ -54,11 +50,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(Dashboard)"
         options={{
-          title: "Dashboard",
-          tabBarLabel: "Dashboard",
+          title: 'Dashboard',
+          tabBarLabel: 'Dashboard',
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../../assets/Icons/Dashboard_Black.svg")}
+              source={require('../../assets/Icons/PNG/Dashboard_Black.png')}
               style={{ width: 24, height: 24, tintColor: color }}
             />
           ),
@@ -67,11 +63,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(Alertas)"
         options={{
-          title: "Alertas",
-          tabBarLabel: "Alertas",
+          title: 'Alertas',
+          tabBarLabel: 'Alertas',
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../../assets/Icons/Alertas_Black.svg")}
+              source={require('../../assets/Icons/PNG/Alertas_Black.png')}
               style={{ width: 24, height: 24, tintColor: color }}
             />
           ),
@@ -80,11 +76,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(Ajustes)"
         options={{
-          title: "Ajustes",
-          tabBarLabel: "Ajustes",
+          title: 'Ajustes',
+          tabBarLabel: 'Ajustes',
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../../assets/Icons/Ajustes_Black.svg")}
+              source={require('../../assets/Icons/PNG/Ajustes_Black.png')}
               style={{ width: 24, height: 24, tintColor: color }}
             />
           ),

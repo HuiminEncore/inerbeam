@@ -2,11 +2,11 @@ import { StyleSheet, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
 import { ThemedView } from "@/components/ThemedView";
 import { fetchDevices, fetchDeviceData } from "@/queries/graphql";
-import { Header } from "@/components/Header";
+import Header from "@/components/Header";
 
-import { SearchBar } from "@/components/SearchBar";
-import { WeatherCard } from "./component/WeatherCard";
+import SearchBar from "@/components/SearchBar";
 import { ImageContainer } from "@/components/ImageContainer";
+import WeatherCard from "./component/WeatherCard";
 
 export default function HomeScreen() {
   const [devices, setDevices] = useState<any[]>([]);
@@ -41,22 +41,33 @@ export default function HomeScreen() {
       <ScrollView>
         <ThemedView style={styles.widgetsContainer}>
           <ThemedView style={styles.widgetRow}>
-            <WeatherCard
-              type="temperature"
-              value={latestData?.temperature || "--"}
-              deviceName={devices[0]?.name || "Dispositivo 1"}
-              userName={devices[0]?.user_name || "Encore-Lab"}
-              deviceType={devices[0]?.device_type || "Sensor T"}
-              link="/(tabs)/(AAhome)/device/1"
-            />
-            <WeatherCard
-              type="co2"
-              value={latestData?.co2 || "--"}
-              deviceName={devices[0]?.name || "Dispositivo 2"}
-              userName={devices[0]?.user_name || "Encore-Lab"}
-              deviceType={devices[0]?.device_type || "Sensor CO2"}
-              link="/(tabs)/(AAhome)/device/2"
-            />
+            {devices.map((device) => (
+              <WeatherCard
+                key={device.id}
+                type="temperature"
+                value={latestData?.temperature || "--"}
+                deviceName={device?.deviceName || "Dispositivo 1"}
+                userName={"Encore-Lab"}
+                deviceType={device?.deviceType || "Sensor T"}
+                link={`/(tabs)/(AAhome)/device/${device?.deviceId}`}
+              />
+            ))}
+            {/* //   <WeatherCard
+            //     type="temperature"
+            //     value={latestData?.temperature || "--"}
+            //     deviceName={device?.name || "Dispositivo 1"}
+            //     userName={device?.user_name || "Encore-Lab"}
+            //   deviceType={devices[0]?.device_type || "Sensor T"}
+            //   link={`/(tabs)/(AAhome)/device/${devices[0]?.id}`}
+            // />
+            // <WeatherCard
+            //   type="co2"
+            //   value={latestData?.co2 || "--"}
+            //   deviceName={devices[1]?.name || "Dispositivo 2"}
+            //   userName={devices[1]?.user_name || "Encore-Lab"}
+            //   deviceType={devices[1]?.device_type || "Sensor CO2"}
+            //   link={`/(tabs)/(AAhome)/device/${devices[1]?.id}`}
+            // /> */}
           </ThemedView>
         </ThemedView>
       </ScrollView>

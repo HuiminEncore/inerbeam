@@ -13,7 +13,7 @@ interface WeatherCardProps {
   link: string;
 }
 
-export function WeatherCard({
+export default function WeatherCard({
   type,
   value,
   deviceName,
