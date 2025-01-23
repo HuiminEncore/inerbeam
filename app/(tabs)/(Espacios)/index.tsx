@@ -1,8 +1,9 @@
-import { StyleSheet } from "react-native";
-import { ThemedView } from "@/components/ThemedView";
-import Header from "@/components/Header";
-import SearchBar from "@/components/SearchBar";
-import { ImageContainer } from "@/components/ImageContainer";
+import { StyleSheet } from 'react-native';
+import { ThemedView } from '@/components/ThemedView';
+import Header from '@/components/Header';
+import SearchBar from '@/components/SearchBar';
+import { ImageContainer } from '@/components/ImageContainer';
+import { ThemedText } from '@/components/ThemedText';
 
 export default function EspaciosScreen() {
   return (
@@ -17,6 +18,6 @@ export default function EspaciosScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
   },
 });

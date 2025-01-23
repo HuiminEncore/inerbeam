@@ -4,7 +4,9 @@ import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
 import { Colors } from '@/constants/Colors';
 import { Link } from 'expo-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Image } from 'react-native';
+import { usePathname } from 'expo-router';
 
 interface HeaderProps {
   onProfilePress?: () => void;
@@ -29,18 +31,35 @@ export const Drawer = ({ isOpen, onClose }: DrawerProps) => {
       activeOpacity={1}
     >
       <View style={styles.drawer}>
-        <Link href="/(tabs)/(AAhome)" asChild>
-          <TouchableOpacity style={styles.menuItem}>
+        <View style={styles.menuItem}>
+          <Link href="/(tabs)/(Espacios)" onPress={onClose} asChild>
             <View style={styles.subMenuItem}>
-              <FontAwesome name="plus" size={20} color={Colors.light.gray} />
+              <Image
+                source={require('../assets/Icons/PNG/Dispositivos_Black.png')}
+                style={{
+                  width: 16,
+                  height: 16,
+                  tintColor: Colors.light.gray,
+                }}
+              />
               <ThemedText style={styles.menuItemText}>Add Device</ThemedText>
             </View>
+          </Link>
+
+          <Link href="/(tabs)/(Alertas)" onPress={onClose} asChild>
             <View style={styles.subMenuItem}>
-              <FontAwesome name="plus" size={20} color={Colors.light.gray} />
+              <Image
+                source={require('../assets/Icons/PNG/Alertas_Black.png')}
+                style={{
+                  width: 16,
+                  height: 16,
+                  tintColor: Colors.light.gray,
+                }}
+              />
               <ThemedText style={styles.menuItemText}>Add Alert</ThemedText>
             </View>
-          </TouchableOpacity>
-        </Link>
+          </Link>
+        </View>
       </View>
     </TouchableOpacity>
   ) : null;
@@ -54,6 +73,11 @@ export default function Header({
   backLink,
 }: HeaderProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [pathname]);
 
   const handleOptionsPress = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -170,9 +194,9 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     flexDirection: 'column',
-    alignItems: 'center',
     padding: 12,
     gap: 12,
+    alignItems: 'flex-start',
   },
   menuItemText: {
     fontSize: 16,
